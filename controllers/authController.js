@@ -21,7 +21,7 @@ exports.sign_up_post = [
         .trim()
         .isLength({ min: 1 })
         .escape(),
-    body("password", "Password must not be emoty")
+    body("password", "Password must not be empty")
         .trim()
         .isLength({ min: 1 })
         .escape(),
@@ -33,7 +33,9 @@ exports.sign_up_post = [
 
         if (!errors.isEmpty()) {
             // There are errors. Render form again with santized values/error messages.
-            res.render("sign-up");
+            res.render("sign-up", {
+                errors: errors.array(),
+            });
         } else {
             // Encrypt password
             bcrypt.hash(req.body.password, 10, async (err, hashedPassword) => {
@@ -59,7 +61,9 @@ exports.sign_up_post = [
 // Display sign in form on GET
 exports.sign_in_get = asyncHandler(async (req, res, next) => {
     console.log(req.session.message);
-    res.render("sign-in");
+    res.render("sign-in", {
+        message: req.session.messages,
+    });
 })
 
 // Handle sign in for User on POST
