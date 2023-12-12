@@ -7,7 +7,7 @@ const auth_controller = require("../controllers/authController");
 /* GET home page. */
 router.get('/', function(req, res, next) {
   console.log(req.user);
-  res.render('index', { user: req.user });
+  res.render('index', { user: req.user});
 });
 
 /// AUTH Routes ///

@@ -2,6 +2,8 @@ const User = require("../models/user");
 const asyncHandler = require("express-async-handler");
 const passport = require('passport');
 const { body, validationResult } = require("express-validator");
+const flash = require("express-flash");
+const bcrypt = require("bcryptjs");
 
 // Display sign up form on GET
 exports.sign_up_get = asyncHandler(async (req, res, next) => {
@@ -29,33 +31,41 @@ exports.sign_up_post = [
         // Extract the validation errors from a request.
         const errors = validationResult(req);
 
-        // Create a User object with escaped and trimmed data.
-        const user = new User({
-            full_name: req.body.full_name,
-            username: req.body.username,
-            password: req.body.password,
-        });
-
         if (!errors.isEmpty()) {
             // There are errors. Render form again with santized values/error messages.
             res.render("sign-up");
         } else {
-            // Data from form is valid. Save user.
-            await user.save();
-            res.redirect("/");
+            // Encrypt password
+            bcrypt.hash(req.body.password, 10, async (err, hashedPassword) => {
+                if (err) {
+                    return next(err);
+                } else {
+                    // Create a User object with escaped and trimmed data.
+                    const user = new User({
+                        full_name: req.body.full_name,
+                        username: req.body.username,
+                        password: hashedPassword,
+                    });
+
+                    // Data from form is valid. Save user.
+                    await user.save();
+                    res.redirect("/");
+                }
+            })
         }
     }))
 ]
 
 // Display sign in form on GET
 exports.sign_in_get = asyncHandler(async (req, res, next) => {
+    console.log(req.session.message);
     res.render("sign-in");
 })
 
 // Handle sign in for User on POST
 exports.sign_in_post = passport.authenticate("local", {
-    successRedirect:"/",
-    failureRedirect:"/sign-in",
+    successRedirect: "/",
+    failureRedirect: "/sign-in",
     failureMessage: true,
 });
 
