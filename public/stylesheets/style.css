@@ -1,8 +1,70 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: rgba(0, 0, 0, 5%);
 }
 
 a {
   color: #00B7FF;
+}
+
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(255, 255, 255);
+  padding: 0 1rem;
+}
+
+.account-dropdown {
+  position: relative;
+  display: inline-block;
+  z-index: 2;
+  padding: 0;
+  margin: 0;
+  outline: 0;
+  text-align: left;
+}
+
+.account-dropdown::before {
+  content: "\2630 \a0 Account";
+  color: white;
+  padding: 5px 10px;
+  border: 1px solid #555;
+  border-radius: 3px;
+  background: #96305e;
+}
+
+.account-dropdown:hover:not(:focus) {
+  filter: brightness(90%);
+}
+
+.account-dropdown:focus {
+  pointer-events: none;
+}
+
+.account-dropdown:focus .dropdown-button {
+  opacity: 1;
+  visibility: visible;
+}
+
+.dropdown-button {
+  background-color: #364656;
+  color: white;
+  width: 250px;
+  margin: 3px 0 0 0;
+  padding: 10px;
+  border-radius: 3px;
+  border: 1px black solid;
+  border-radius: 3px;
+  pointer-events: auto;
+  position: absolute;
+  right: 0;
+  z-index: 1;
+  opacity: 0;
+  visibility: hidden;
+  transition: visibility 1s;
 }

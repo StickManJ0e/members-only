@@ -4,18 +4,31 @@
 <head>
   <meta charset="UTF-8">
   <title></title>
+  <link rel="stylesheet" href="stylesheets/style.css" type="text/css">
 </head>
 
 <body>
-  <h1>Members Only</h1>
-  <% if (user) { %>
-    <p>Welcome back <%= user.full_name %>
-    </p>
-    <a href="/log-out">Log Out</a>
-    <% } else { %>
-      <button><a href="/sign-in">Sign In</a></button>
-      <button><a href="/sign-up">Sign Up</a></button>
-      <% } %>
+  <header id="header">
+    <h1>MembersOnly</h1>
+    <% if (user) { %>
+      <div class="button-div">
+        <button>Become a Member </button>
+        <div tabindex="0" class="account-dropdown">
+          <div class="dropdown-button">
+            <div>Signed in as <%= user.full_name %>
+            </div>
+            <button><a href="/log-out">Log Out</a></button>
+          </div>
+        </div>
+      </div>
+      <% } else { %>
+        <div class="button-div">
+          <button><a href="/sign-in">Sign In</a></button>
+          <button><a href="/sign-up">Sign Up</a></button>
+        </div>
+        <% } %>
+  </header>
+
 </body>
 
 </html>

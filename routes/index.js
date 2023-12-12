@@ -5,9 +5,14 @@ var router = express.Router();
 const auth_controller = require("../controllers/authController");
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  console.log(req.user);
-  res.render('index', { user: req.user});
+router.get('/', function (req, res, next) {
+  const test = ( ) => {
+    console.log('test');
+  }
+    res.render('index', {
+    user: req.user,
+    test: test,
+  });
 });
 
 /// AUTH Routes ///

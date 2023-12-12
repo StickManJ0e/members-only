@@ -24,7 +24,7 @@ async function main() {
       useNewUrlParser: true,
       useUnifiedTopology: true
     });
-  console.log("Connected to MongoDB Atlass!");
+  console.log("Connected to MongoDB Atlas!");
 }
 
 main().catch((err) => console.log(err));

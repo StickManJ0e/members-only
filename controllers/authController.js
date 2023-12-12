@@ -60,7 +60,7 @@ exports.sign_up_post = [
 
 // Display sign in form on GET
 exports.sign_in_get = asyncHandler(async (req, res, next) => {
-    console.log(req.session.message);
+
     res.render("sign-in", {
         message: req.session.messages,
     });
