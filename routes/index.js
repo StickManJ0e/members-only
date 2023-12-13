@@ -44,7 +44,10 @@ router.post('/become-member', user_controller.become_member_post);
 
 /// Message Controllers 
 
-//GET request for Create Message form
+// GET request for Create Message form
 router.get('/create-message', message_controller.create_message_get);
+
+// POST request for Create Message form
+router.post('/create-message', message_controller.create_message_post);
 
 module.exports = router;

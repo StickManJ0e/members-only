@@ -10,7 +10,7 @@ exports.become_member_get = asyncHandler(async (req, res, next) => {
         })
     } else {
         // Redirect to homepage if not logged in
-        res.redirect("/")
+        res.redirect("/");
     }
 })
 

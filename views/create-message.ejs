@@ -4,11 +4,20 @@
     <form action="/create-message" method="POST">
         <div class="form-div">
             <label for="title">Title</label>
-            <input name="title" type="text" placeholder="Title of your messages..."></input>
+            <input name="title" type="text" placeholder="Title of your messages..." maxlength="100"></input>
         </div>
         <div class="form-div">
             <label for="message">Message</label>
-            <input name="message" type="text" placeholder="Your message...">
+            <input name="message" type="text" placeholder="Your message..." maxlength="2200">
         </div>
         <button type="submit">Submit</button>
+        <% if (typeof errors !=='undefined' ) {%>
+            <ul>
+                <% errors.forEach(function(error) { %>
+                    <li>
+                        <%= error.msg%>
+                    </li>
+                    <%})%>
+            </ul>
+            <%}%>
     </form>
