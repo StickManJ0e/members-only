@@ -7,15 +7,7 @@ const user_controller = require("../controllers/userController");
 const message_controller = require("../controllers/messageController");
 
 /* GET home page. */
-router.get('/', function (req, res, next) {
-  const test = () => {
-    console.log('test');
-  }
-  res.render('index', {
-    user: req.user,
-    test: test,
-  });
-});
+router.get('/', message_controller.index);
 
 /// AUTH Routes ///
 

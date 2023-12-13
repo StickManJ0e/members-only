@@ -2,6 +2,16 @@ const Message = require("../models/message");
 const asyncHandler = require("express-async-handler");
 const { body, check, validationResult } = require("express-validator");
 
+// Display list of all messages 
+exports.index = asyncHandler(async (req, res, next) => {
+    const allMessages = await Message.find({}).sort({ timestamp: -1 }).populate("user").exec();
+
+    res.render("index", {
+        message_list: allMessages,
+        user: req.user,
+    });
+})
+
 // Display create message form on GET
 exports.create_message_get = asyncHandler(async (req, res, next) => {
     if (req.user) {
@@ -45,7 +55,7 @@ exports.create_message_post = [
             });
             await message.save();
             res.redirect('/');
-            
+
         }
     })
 ]

@@ -1,2 +1,26 @@
 <% extend('layout') %>
-  <h1>Hello world!</h1>
+
+  <h1>Messages</h1>
+  <div class="message-container">
+    <% if (message_list.length> 0) { %>
+      <% message_list.forEach((message)=> { %>
+        <div class="message-div">
+          <div class="title">
+            <%= message.title %>
+          </div>
+          <div class="body">
+            <%= message.body %>
+          </div>
+          <div class="username">
+            <%= message.user.full_name %>
+          </div>
+          <div class="date">
+            <%= new Date(message.timestamp).toLocaleString("en-AU", {dateStyle: "full" , timeStyle: "short" }) %>
+          </div>
+        </div>
+
+        <% }) %>
+          <% } else {%>
+            <div>There are no messages.</div>
+            <%}%>
+  </div>
