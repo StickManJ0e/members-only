@@ -4,9 +4,14 @@ const { body, check, validationResult } = require("express-validator");
 
 // Display become member form on GET
 exports.become_member_get = asyncHandler(async (req, res, next) => {
-    res.render("become-member", {
-        user: req.user,
-    })
+    if (req.user) {
+        res.render("become-member", {
+            user: req.user,
+        })
+    } else {
+        // Redirect to homepage if not logged in
+        res.redirect("/")
+    }
 })
 
 // Handle become member form on POST
@@ -26,7 +31,16 @@ exports.become_member_post = [
                 errors: errors.array(),
             })
         } else {
+            await User.findOneAndUpdate(
+                {"_id": req.user._id},
+                {
+                    "$set": {
+                        "member": true,
+                    }
+                }
+            )
             console.log("correct!");
+            res.redirect("/");
         }
     })
 ];
