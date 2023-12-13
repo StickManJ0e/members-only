@@ -1,0 +1,14 @@
+<% extend('layout') %>
+
+    <h1>New message</h1>
+    <form action="/create-message" method="POST">
+        <div class="form-div">
+            <label for="title">Title</label>
+            <input name="title" type="text" placeholder="Title of your messages..."></input>
+        </div>
+        <div class="form-div">
+            <label for="message">Message</label>
+            <input name="message" type="text" placeholder="Your message...">
+        </div>
+        <button type="submit">Submit</button>
+    </form>

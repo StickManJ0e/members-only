@@ -1,6 +1,6 @@
 const User = require("../models/user");
 const asyncHandler = require("express-async-handler");
-const { body, check, validationResult } = require("express-validator");
+const { check, validationResult } = require("express-validator");
 
 // Display become member form on GET
 exports.become_member_get = asyncHandler(async (req, res, next) => {

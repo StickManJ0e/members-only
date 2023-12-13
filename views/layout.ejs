@@ -12,14 +12,17 @@
         <h1>MembersOnly</h1>
         <% if (user) { %>
             <div class="button-div">
-                <button><a href="/become-member">Become a Member</a></button>
-                <div tabindex="0" class="account-dropdown">
-                    <div class="dropdown-button">
-                        <div>Signed in as <%= user.full_name %>
+                <% if (!user.member) { %>
+                    <button><a href="/become-member">Become a Member</a></button>
+                    <% } %>
+                    <button><a href="/create-message">New Message</a></button>
+                        <div tabindex="0" class="account-dropdown">
+                            <div class="dropdown-button">
+                                <div>Signed in as <%= user.full_name %>
+                                </div>
+                                <button><a href="/log-out">Log Out</a></button>
+                            </div>
                         </div>
-                        <button><a href="/log-out">Log Out</a></button>
-                    </div>
-                </div>
             </div>
             <% } else { %>
                 <div class="button-div">

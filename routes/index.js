@@ -4,6 +4,7 @@ var router = express.Router();
 // Require controller modules.
 const auth_controller = require("../controllers/authController");
 const user_controller = require("../controllers/userController");
+const message_controller = require("../controllers/messageController");
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -35,10 +36,15 @@ router.get('/log-out', auth_controller.log_out);
 
 /// USER Routes ///
 
-// Get request for Become Member form
+// GET request for Become Member form
 router.get('/become-member', user_controller.become_member_get);
 
-// Post request for Become Member form
+// POST request for Become Member form
 router.post('/become-member', user_controller.become_member_post);
+
+/// Message Controllers 
+
+//GET request for Create Message form
+router.get('/create-message', message_controller.create_message_get);
 
 module.exports = router;
