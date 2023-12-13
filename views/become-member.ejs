@@ -1,0 +1,18 @@
+<% extend('layout') %>
+
+    <h1>Become a member</h1>
+    <p>Enter the correct passcode to gain member status.</p>
+    <form action="/become-member" method="POST">
+        <label for="passcode">Password</label>
+        <input name="passcode" type="text" />
+        <% if (typeof errors !=='undefined' ) {%>
+            <ul>
+                <% errors.forEach(function(error) { %>
+                    <li>
+                        <%= error.msg%>
+                    </li>
+                    <%})%>
+            </ul>
+            <%}%>
+                <button type="submit">Submit</button>
+    </form>

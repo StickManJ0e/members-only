@@ -2,12 +2,13 @@ const User = require("../models/user");
 const asyncHandler = require("express-async-handler");
 const passport = require('passport');
 const { body, validationResult } = require("express-validator");
-const flash = require("express-flash");
 const bcrypt = require("bcryptjs");
 
 // Display sign up form on GET
 exports.sign_up_get = asyncHandler(async (req, res, next) => {
-    res.render("sign-up");
+    res.render("sign-up", {
+        user: req.user,
+    });
 })
 
 // Handle sign up for User on POST
@@ -27,7 +28,7 @@ exports.sign_up_post = [
         .escape(),
     // Process request after validation and sanitization.
 
-    asyncHandler(asyncHandler(async (req, res, next) => {
+    asyncHandler(async (req, res, next) => {
         // Extract the validation errors from a request.
         const errors = validationResult(req);
 
@@ -35,6 +36,7 @@ exports.sign_up_post = [
             // There are errors. Render form again with santized values/error messages.
             res.render("sign-up", {
                 errors: errors.array(),
+                user: req.user,
             });
         } else {
             // Encrypt password
@@ -55,14 +57,15 @@ exports.sign_up_post = [
                 }
             })
         }
-    }))
+    })
 ]
 
 // Display sign in form on GET
 exports.sign_in_get = asyncHandler(async (req, res, next) => {
-
+    const errorMessage = ((req.session.messages) ? req.session.messages.slice(-1) : "")
     res.render("sign-in", {
-        message: req.session.messages,
+        message: errorMessage,
+        user: req.user,
     });
 })
 

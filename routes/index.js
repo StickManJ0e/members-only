@@ -3,13 +3,14 @@ var router = express.Router();
 
 // Require controller modules.
 const auth_controller = require("../controllers/authController");
+const user_controller = require("../controllers/userController");
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  const test = ( ) => {
+  const test = () => {
     console.log('test');
   }
-    res.render('index', {
+  res.render('index', {
     user: req.user,
     test: test,
   });
@@ -31,5 +32,13 @@ router.post('/sign-in', auth_controller.sign_in_post);
 
 // GET request for User log out
 router.get('/log-out', auth_controller.log_out);
+
+/// USER Routes ///
+
+// Get request for Become Member form
+router.get('/become-member', user_controller.become_member_get);
+
+// Post request for Become Member form
+router.post('/become-member', user_controller.become_member_post);
 
 module.exports = router;
