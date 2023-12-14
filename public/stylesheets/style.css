@@ -130,25 +130,44 @@ a {
 
 
 .button-div>button,
-.delete-message {
+.delete-message,
+form>button {
   height: 3rem;
   padding: 1rem;
 }
 
 .button-div>button:hover,
 .delete-message:hover,
-log-out-button:hover {
+.log-out-button:hover,
+form>button:hover {
   filter: brightness(90%);
+  cursor: pointer;
+}
+
+.log-out-button,
+form>button {
+  height: 2rem;
+  padding: 0 1rem;
 }
 
 .log-out-button {
   align-self: center;
-  height: 2rem;
-  padding: 0 1rem;
 }
 
 .account-membership {
   padding: 1rem 0;
   border-top: solid rgba(0, 0, 0, 0.5) 1px;
   border-bottom: solid rgba(0, 0, 0, 0.5) 1px;
+}
+
+form>button {
+  background: rgba(100, 100, 111, 0.2);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  margin: 1rem;
+  gap: 1rem;
 }
