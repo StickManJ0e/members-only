@@ -66,7 +66,7 @@ exports.message_delete_get = asyncHandler(async (req, res, next) => {
         Message.findById(req.params.id).exec()
     ]);
 
-    if (message === null) {
+    if (message === null || !req.user) {
         // No results
         res.redirect("/");
     };
@@ -83,9 +83,6 @@ exports.message_delete_post = asyncHandler(async (req, res, next) => {
     const [message] = await Promise.all([
         Message.findById(req.params.id).exec()
     ]);
-
-    console.log(req.user);
-    console.log(req.params);
 
     await Message.findByIdAndDelete(req.body.messageid);
     res.redirect("/");

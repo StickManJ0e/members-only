@@ -1,8 +1,8 @@
 <% extend('layout') %>
 
-<h1>Delete Message</h1>
-<p>Do you really want to delete this message?</p>
-<form method="POST" action="">
-    <input type="hidden" name="messageid" required="true" value="<%= message._id %>">
-    <button type="submit">Delete</button>
-</form>
+    <h1>Delete Message</h1>
+    <p>Do you really want to delete this message?</p>
+    <form method="POST" action="/:id/message-delete">
+        <input type="hidden" name="messageid" required="true" value="<%= message._id %>">
+        <button type="submit">Delete</button>
+    </form>
