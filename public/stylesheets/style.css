@@ -68,3 +68,24 @@ header {
   visibility: hidden;
   transition: visibility 1s;
 }
+
+.message-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.message-div {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+  border: 5px solid black;
+  padding: 1rem;
+}
+
+.message-div>.body {
+  overflow-wrap: break-word;
+}
+
+h1.page-title {
+  margin: 1rem;
+}

@@ -55,7 +55,34 @@ exports.create_message_post = [
             });
             await message.save();
             res.redirect('/');
-
         }
     })
 ]
+
+// Display message delete form on GET
+exports.message_delete_get = asyncHandler(async (req, res, next) => {
+    // Get details of message
+    const [message] = await Promise.all([
+        Message.findById(req.params.id).exec()
+    ]);
+
+    if (message === null) {
+        // No results
+        res.redirect("/");
+    };
+
+    res.render("message-delete", {
+        message: message,
+    });
+});
+
+// Handle message delete on POST
+exports.message_delete_post = asyncHandler(async (req, res, next) => {
+    // Get details of message
+    const [message] = await Promise.all([
+        Message.findById(req.params.id).exec()
+    ]);
+
+    await Message.findByIdAndDelete(req.body.authorid);
+    res.redirect("/");
+})

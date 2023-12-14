@@ -1,26 +1,55 @@
 <% extend('layout') %>
-
-  <h1>Messages</h1>
+  <h1 class="page-title">Messages</h1>
   <div class="message-container">
     <% if (message_list.length> 0) { %>
       <% message_list.forEach((message)=> { %>
-        <div class="message-div">
-          <div class="title">
-            <%= message.title %>
+        <% if (user && user.admin) { %>
+          <div class="message-div">
+            <div class="title">
+              <%= message.title %>
+            </div>
+            <div class="username">
+              by <%= message.user.full_name %>
+            </div>
+            <div class="date">
+              <%= new Date(message.timestamp).toLocaleString("en-AU", {dateStyle: "full" , timeStyle: "short" }) %>
+            </div>
+            <div class="body">
+              <%= message.body %>
+            </div>
+            <button class="delete-message">Delete</button>
           </div>
-          <div class="body">
-            <%= message.body %>
-          </div>
-          <div class="username">
-            <%= message.user.full_name %>
-          </div>
-          <div class="date">
-            <%= new Date(message.timestamp).toLocaleString("en-AU", {dateStyle: "full" , timeStyle: "short" }) %>
-          </div>
-        </div>
+          <% } else if (user && user.member) { %>
+            <div class="message-div">
+              <div class="title">
+                <%= message.title %>
+              </div>
+              <div class="username">
+                by <%= message.user.full_name %>
+              </div>
+              <div class="date">
+                <%= new Date(message.timestamp).toLocaleString("en-AU", {dateStyle: "full" , timeStyle: "short" }) %>
+              </div>
+              <div class="body">
+                <%= message.body %>
+              </div>
+            </div>
+            <% } else {%>
+              <div class="message-div">
+                <div class="title">
+                  <%= message.title %>
+                </div>
+                <div class="body">
+                  <%= message.body %>
+                </div>
+                <div class="note">
+                  Note: Become a member to know who wrote this message and when.
+                </div>
+              </div>
+              <% } %>
 
-        <% }) %>
-          <% } else {%>
-            <div>There are no messages.</div>
-            <%}%>
+                <% }) %>
+                  <% } else {%>
+                    <div>There are no messages.</div>
+                    <%}%>
   </div>
