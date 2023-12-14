@@ -17,7 +17,7 @@
             <div class="body">
               <%= message.body %>
             </div>
-            <button class="delete-message">Delete</button>
+            <button class="delete-message"><a href="<%= message._id%>/delete">Delete</a></button>
           </div>
           <% } else if (user && user.member) { %>
             <div class="message-div">
