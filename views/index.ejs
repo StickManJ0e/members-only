@@ -1,31 +1,16 @@
 <% extend('layout') %>
-  <h1 class="page-title">Messages</h1>
-  <div class="message-container">
-    <% if (message_list.length> 0) { %>
-      <% message_list.forEach((message)=> { %>
-        <% if (user && user.admin) { %>
-          <div class="message-div">
-            <div class="title">
-              <%= message.title %>
-            </div>
-            <div class="username">
-              by <%= message.user.full_name %>
-            </div>
-            <div class="date">
-              <%= new Date(message.timestamp).toLocaleString("en-AU", {dateStyle: "full" , timeStyle: "short" }) %>
-            </div>
-            <div class="body">
-              <%= message.body %>
-            </div>
-            <button class="delete-message"><a href="/<%= message._id%>/delete">Delete</a></button>
-          </div>
-          <% } else if (user && user.member) { %>
+  <div id="index-container">
+    <h1 class="page-title">Messages</h1>
+    <div class="message-container">
+      <% if (message_list.length> 0) { %>
+        <% message_list.forEach((message)=> { %>
+          <% if (user && user.admin) { %>
             <div class="message-div">
               <div class="title">
                 <%= message.title %>
               </div>
               <div class="username">
-                by <%= message.user.full_name %>
+                <strong>by</strong> <%= message.user.full_name %>
               </div>
               <div class="date">
                 <%= new Date(message.timestamp).toLocaleString("en-AU", {dateStyle: "full" , timeStyle: "short" }) %>
@@ -33,23 +18,41 @@
               <div class="body">
                 <%= message.body %>
               </div>
+              <button class="delete-message"><a href="/<%= message._id%>/delete">Delete</a></button>
             </div>
-            <% } else {%>
+            <% } else if (user && user.member) { %>
               <div class="message-div">
                 <div class="title">
                   <%= message.title %>
                 </div>
+                <div class="username">
+                  <strong>by</strong> <%= message.user.full_name %>
+                </div>
+                <div class="date">
+                  <%= new Date(message.timestamp).toLocaleString("en-AU", {dateStyle: "full" , timeStyle: "short" }) %>
+                </div>
                 <div class="body">
                   <%= message.body %>
                 </div>
-                <div class="note">
-                  Note: Become a member to know who wrote this message and when.
-                </div>
               </div>
-              <% } %>
+              <% } else {%>
+                <div class="message-div">
+                  <div class="title">
+                    <%= message.title %>
+                  </div>
+                  <div class="body">
+                    <%= message.body %>
+                  </div>
+                  <div class="note">
+                    <strong>Note:</strong> Become a member to know who wrote this message and when.
+                  </div>
+                </div>
+                <% } %>
 
-                <% }) %>
-                  <% } else {%>
-                    <div>There are no messages.</div>
-                    <%}%>
+                  <% }) %>
+                    <% } else {%>
+                      <div>There are no messages.</div>
+                      <%}%>
+    </div>
+
   </div>

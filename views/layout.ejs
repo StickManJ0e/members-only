@@ -15,12 +15,31 @@
                 <% if (!user.member) { %>
                     <button><a href="/become-member">Become a Member</a></button>
                     <% } %>
-                    <button><a href="/create-message">New Message</a></button>
+                        <button><a href="/create-message">New Message</a></button>
                         <div tabindex="0" class="account-dropdown">
                             <div class="dropdown-button">
-                                <div>Signed in as <%= user.full_name %>
+                                <div class="account-info">
+                                    <div>Signed in as</div>
+                                    <div class="full_name">
+                                        <%= user.full_name %>
+                                    </div>
+                                    <div class="email">
+                                        <%= user.username %>
+                                    </div>
                                 </div>
-                                <button><a href="/log-out">Log Out</a></button>
+                                <div class="account-membership">
+                                    <div>Membership status</div>
+                                    <div class="member">
+                                        <% if (user && user.admin) {%>
+                                            Admin
+                                            <%} else if (user && user.member) { %>
+                                                Member
+                                                <% } else { %>
+                                                    user
+                                                    <%} %>
+                                    </div>
+                                </div>
+                                <button class="log-out-button"><a href="/log-out">Log Out</a></button>
                             </div>
                         </div>
             </div>
